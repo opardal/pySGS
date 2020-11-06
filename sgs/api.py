@@ -27,7 +27,7 @@ def get_data(ts_code: int, begin: str, end: str) -> List:
 
 @retry(stop_max_attempt_number=MAX_ATTEMPT_NUMBER)
 @functools.lru_cache(maxsize=LRU_CACHE_SIZE)
-def get_data_olinda(resource: str, begin: str, end: Union[None, str]) -> List:
+def get_data_olinda(resource: str, begin: str, end: str) -> List:
     """
     Requests data frames from the BCB Olinda API in json format.
     """
