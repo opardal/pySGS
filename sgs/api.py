@@ -42,12 +42,9 @@ def get_data_olinda(resource: str, begin: str, end: Union[None, str]) -> List:
         }
 
     # TODO: Olinda API expects ISO dates
-    begin_iso = to_datetime(begin, 'pt')
-    if end:
-        end_iso = to_datetime(end, 'pt')
-    else:
-        end_iso = ''
-
+    begin_iso = to_datetime(begin, 'pt').strftime('%Y-%m-%d')
+    end_iso = to_datetime(end, 'pt').strftime('%Y-%m-%d')
+    
     url = (
         "https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/"
         "{}?$filter=Data%20ge%20'{}'%20and%20Data%20le%20'{}'&"
