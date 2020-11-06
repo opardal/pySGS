@@ -42,10 +42,13 @@ def get_data_olinda(resource: str, begin: str, end: str) -> List:
         }
 
     # TODO: Olinda API expects ISO dates
-    
+    """
     begin_iso = datetime.datetime.strptime(begin, '%d/%m/%Y').strftime('%Y-%m-%d')
     end_iso = datetime.datetime.strptime(end, '%d/%m/%Y').strftime('%Y-%m-%d')
-    
+    """
+    begin_iso = to_datetime(begin, 'pt').strftime('%Y-%m-%d')
+    end_iso = to_datetime(end, 'pt').strftime('%Y-%m-%d')
+
     url = (
         "https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/"
         "{}?$filter=Data%20ge%20'{}'%20and%20Data%20le%20'{}'&"
@@ -81,7 +84,7 @@ def get_data_with_strict_range(ts_code: int, begin: str, end: str) -> List:
     period_start_date = to_datetime(begin, 'pt')
     
     try:
-        is_out_of_range =  first_record_date < period_start_date  #type: ignore
+        is_out_of_range = first_record_date < period_start_date  #type: ignore
         if is_out_of_range:
             raise ValueError
     except TypeError:
