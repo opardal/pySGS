@@ -46,25 +46,17 @@ def get_data_with_strict_range(ts_code: int, begin: str, end: str) -> List:
     try:
         period_start_date = to_datetime(begin, "pt")
         period_end_date = to_datetime(end, "pt")
-
         first_record_date = to_datetime(data[0]["data"], "pt")
 
         is_out_of_range = first_record_date < period_start_date
         if is_out_of_range:
             raise RuntimeError("No data for the requested period")
+            
     except ValueError:
-        print(
-            "ERROR: Serie "
-            + str(ts_code)
-            + " - Please, use 'DD/MM/YYYY' format for date strings."
-        )
+        print("ERROR: Serie " + str(ts_code) + " - Please, use 'DD/MM/YYYY' format for date strings.")
         data = []
     except RuntimeError:
-        print(
-            "WARNING: Serie "
-            + str(ts_code)
-            + " - There is no data for the requested period, but there's previous data."
-        )
+        print("WARNING: Serie " + str(ts_code) + " - There is no data for the requested period, but there's previous data.")
         data = []
 
     return data
