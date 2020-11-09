@@ -1,4 +1,4 @@
-from typing import Optional, List, Union
+from typing import List, Union
 import pandas as pd
 
 from .search import search_ts
@@ -6,7 +6,7 @@ from .search import search_ts
 
 def metadata(
     ts_code: Union[int, pd.DataFrame, pd.Series], language: str = "en"
-) -> Optional[List]:
+) -> List:
     """Request metadata about a time serie or all time series in a pandas dataframe.
 
     :param ts_code: time serie code or pandas dataframe with time series as columns.
